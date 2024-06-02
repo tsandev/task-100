@@ -4,10 +4,6 @@ nelmio_api_doc:
             title: My App
             description: This is an awesome app!
             version: 1.0.0
-    areas:
-        path_patterns: # an array of regexps (document only routes under /api, except /api/doc)
-            - ^/api(?!/doc$)
-            - ^/count
-        host_patterns: # document only routes with a host of the form api.*
-            - ^api\.
-            - ^/count
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc

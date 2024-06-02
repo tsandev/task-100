@@ -30,7 +30,7 @@ class LogRecordRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function getLastRecordTime(): \DateTimeInterface
+    public function getLastRecordTime(): \DateTimeImmutable
     {
         /** @var LogRecord $lastRecord */
         $lastRecord = $this->createQueryBuilder('log')

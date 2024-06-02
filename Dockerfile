@@ -31,6 +31,7 @@ RUN set -eux; \
 		intl \
 		opcache \
 		zip \
+    	pdo_sqlite \
 	;
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser

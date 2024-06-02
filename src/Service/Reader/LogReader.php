@@ -6,8 +6,7 @@ namespace App\Service\Reader;
 
 class LogReader implements ReaderInterface
 {
-//        private int $chunkSize = 1024 * 1024; // 1MB
-    private int $chunkSize = 200;
+    private int $chunkSize = 1024 * 1024; // 1MB
 
     // Placeholder for partial lines.
     private string $suffix = '';
