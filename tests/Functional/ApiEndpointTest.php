@@ -31,7 +31,7 @@ class ApiEndpointTest extends WebTestCase
         );
 
 
-        $client->request('GET', "/count?{$query}");
+        $client->request('GET', "/api/count?{$query}");
 
         self::assertResponseIsSuccessful();
 
@@ -44,8 +44,8 @@ class ApiEndpointTest extends WebTestCase
         return [
             'No filters' => ['', 10],
             'Filter by statusCode' => ['statusCode=201', 5],
-            'Filter by service name' => ['serviceNames=USER-SERVICE', 5],
-            'Filter by service names' => ['serviceNames=USER-SERVICE,INVOICE-SERVICE', 10],
+            'Filter by service name' => ['serviceNames[]=USER-SERVICE', 5],
+            'Filter by service names' => ['serviceNames[]=USER-SERVICE&serviceNames[]=INVOICE-SERVICE', 10],
             'Filter by startDate' => [
                 'startDate=' . (new \DateTimeImmutable('-2 days'))->format('Y-m-d H:i:s'),
                 0,

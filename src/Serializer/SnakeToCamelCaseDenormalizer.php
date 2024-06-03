@@ -20,28 +20,14 @@ final class SnakeToCamelCaseDenormalizer implements DenormalizerInterface
                 continue;
             }
 
-            switch ($camelCaseKey) {
-                case 'statusCode':
-                    $value = (int)$value;
-
-                    break;
-                case 'startDate':
-                case 'endDate':
-                    $value = (string)$value;
-
-                    break;
-
-                case 'serviceNames':
-                    $value = explode(',', $value);
-                    $value = array_map('trim', $value);
-
-                    break;
-
-                default:
-                    throw new \InvalidArgumentException(
-                        sprintf('Provided argument %s is invalid', $camelCaseKey),
-                    );
-            }
+            $value = match ($camelCaseKey) {
+                'statusCode' => (int)$value,
+                'startDate', 'endDate' => (string)$value,
+                'serviceNames' => array_map('trim', $value),
+                default => throw new \InvalidArgumentException(
+                    sprintf('Provided argument %s is invalid', $camelCaseKey),
+                ),
+            };
 
             $dto->{$camelCaseKey} = $value;
         }

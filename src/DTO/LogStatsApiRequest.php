@@ -4,18 +4,12 @@ declare(strict_types=1);
 
 namespace App\DTO;
 
-use App\Enum\ServiceName;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class LogStatsApiRequest
 {
     public function __construct(
         #[Assert\NotBlank(allowNull: true)]
-        #[Assert\Choice(
-            callback: [ServiceName::class, 'getReadableNames'],
-            multiple: true,
-            multipleMessage: 'Some of the given serviceNames values is invalid',
-        )]
         public array|string|null $serviceNames = null,
 
         #[Assert\NotBlank(allowNull: true)]

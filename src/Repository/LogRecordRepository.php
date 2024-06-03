@@ -30,7 +30,7 @@ class LogRecordRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function getLastRecordTime(): \DateTimeImmutable
+    public function getLastRecordTime(): \DateTimeInterface
     {
         /** @var LogRecord $lastRecord */
         $lastRecord = $this->createQueryBuilder('log')
@@ -54,7 +54,7 @@ class LogRecordRepository extends ServiceEntityRepository
         if ($apiRequest->serviceNames) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->in('log.serviceName', ':serviceNames'))
-                ->setParameter('serviceNames', $apiRequest->serviceNames);
+                ->setParameter('serviceNames', array_values($apiRequest->serviceNames));
         }
 
         if ($apiRequest->statusCode) {
